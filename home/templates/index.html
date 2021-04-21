@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>İlk sayfam</title>
-</head>
-<body>
-<h1>başlıkk</h1>
-</body>
-</html>
+{% extends "homebase.html" %}
+
+{% block  title %} İndex Sayfası {% endblock %}
+{% block  keywords %} index sayfası anahtar kelimeler {% endblock %}
+{% block  description %}index sayfası açıklamalar  {% endblock %}
+
+{% block  sidebar %}
+{% include "sidebar.html" %}
+{% endblock %}
+
+{% block  slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block  body %}
+{% include "content.html" %}
+{% endblock %}
