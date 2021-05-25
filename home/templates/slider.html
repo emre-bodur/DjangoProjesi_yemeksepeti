@@ -1,0 +1,27 @@
+{% load static %}
+<section>
+    <div class="pademre">
+        <div class="restaurant-searching text-center">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12" >
+                    <div class="blog-detail-thumb wow fadeIn" data-wow-delay="0.2s" >
+
+                        <div class="featured-restaurant-carousel" >
+                            {% for rs in sliderdata %}
+                                <div class="featured-restaurant-thumb" >
+                                <img src="{{ rs.image.url }}" itemprop="image" height="400px" width="111">
+                                <div class="text-block">
+                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                                    <h4>{{ rs.title }}</h4>
+                                    <p>{{ rs.description }}</p></a>
+                                </div></div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section><!-- choose and enjoy meal -->

@@ -1,0 +1,43 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Referanslar {{ setting.company }} {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    section>
+    <div class="block">
+        <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+        <div class="restaurant-searching text-center">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="page-title-inner">
+                    <h1 itemprop="headline">Referanslarımız</h1>
+                    <span>--------------------------------</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Anasayfa / </a></li>
+                <a class="breadcrumb-item active" href="referanslar.html">Referanslar</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            {{ setting.references | safe }}
+        </div>
+    </div>
+{% endblock %}

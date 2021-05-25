@@ -1,0 +1,89 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Ürünler - {{ categorydata.title }} {% endblock %}
+{% block  keywords %} {{ categorydata.keywords }} {% endblock %}
+{% block  description %}{{ categorydata.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">Search Found</h1>
+                        <span>A Greate Restaurant Website</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa </a></li>
+                <li class="breadcrumb-item"><a href="products.html" title=""
+                                               itemprop="url"> {{ categorydata.title }} </a></li>
+
+            </ol>
+        </div>
+    </div>
+
+    <section>
+            <div class="block less-spacing gray-bg top-padd30">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="sec-box">
+                            <h2>{{ category.title }} Çeşitleri </h2>
+                            <hr>
+                            {% for rs in products %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                    <div class="popular-dish-box style2 wow fadeIn"
+                                         data-wow-delay="0.2s">
+                                        <div class="popular-dish-thumb">
+                                            <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                               title=""
+                                               itemprop="url"><img
+                                                    src="{{ rs.image.url }} "
+                                                    alt=""
+                                                    itemprop="image"></a>
+                                            <span class="post-rate yellow-bg brd-rd2">
+                                                                                            <i class="fa fa-star-o"></i> 4.25</span>
+                                        </div>
+                                        <div class="popular-dish-info">
+                                            <h4 itemprop="headline"><a
+                                                    href="/product/{{ rs.id }}/{{ rs.slug }}>{{ rs.title }}"
+                                                    title=""
+                                                    itemprop="url">{{ rs.title }}</a>
+                                            </h4>
+                                            <p itemprop="description">{{ rs.description }}</p>
+                                            <span class="price">{{ rs.price }}</span>
+                                            <a class="brd-rd4 "
+                                               href="/order/addtocart/{{ product.id }}"
+                                               title="Order No1231w"
+                                               itemprop="url" >Hemen
+                                                Sipariş Ver</a>
+
+                                        </div>
+                                    </div><!-- Popular Dish Box -->
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+{% endblock %}

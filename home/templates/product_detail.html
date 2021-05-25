@@ -1,0 +1,310 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} {{ product.title }} {% endblock %}
+{% block  keywords %} {{ product.keywords }} {% endblock %}
+{% block  description %}{{ product.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+     <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">{{ product.title }} Detayı</h1>
+                        <span>---------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" title="" itemprop="url">Anasayfa</a></li>
+                <li class="breadcrumb-item active"><a
+                        href="/category/{{ product.category.id }}/{{ product.category.slug }}" title=""
+                        itemprop="url">{{ product.category }}</a></li>
+                <li class="breadcrumb-item active"><a href="#" title="" itemprop="url">{{ product.title }}</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="bread-crumbs-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sec-box">
+                            <div class="sec-wrapper">
+                                <div class="col-md-8 col-sm-12 col-lg-8">
+                                    <div class="restaurant-detail-wrapper">
+                                        <div class="restaurant-detail-info">
+                                            <div class="restaurant-detail-thumb">
+                                                <ul class="restaurant-detail-img-carousel">
+                                                    <li><img class="brd-rd3" src="{{ product.image.url }}" alt=""
+                                                             itemprop="image"></li>
+                                                    {% for rs in images %}
+                                                        <li><img class="brd-rd3" src="{{ rs.images.url }}" alt=""
+                                                                 itemprop="image"></li>
+                                                    {% endfor %}
+                                                </ul>
+                                                <ul class="restaurant-detail-thumb-carousel">
+                                                    <li><img class="brd-rd3" src="{{ product.image.url }}"
+                                                             alt="{{ product.image.url }}" itemprop="image"></li>
+                                                    {% for rs in images %}
+                                                        <li><img class="brd-rd3" src="{{ rs.images.url }}"
+                                                                 alt="{{ rs.image.url }}" itemprop="image"></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="restaurant-detail-title">
+                                                <h1 itemprop="headline">{{ product.title }}</h1>
+                                                <div class="info-meta">
+                                                    <span>{{ product.description }}</span>
+                                                    <span><a href="#" title="" itemprop="url">{{ product.restaurant }}</a></span>
+                                                </div>
+                                                <div class="rating-wrapper">
+                                                    <a class="gradient-brd brd-rd2" href="#" title="" itemprop="url"><i
+                                                            class="fa fa-star"></i> Beğeni Oranı <i>4.0</i></a>
+                                                    <div class="rate-share brd-rd5">
+                                                        <div class="rating-box-wrapper">
+                                                            <span>Rate</span>
+                                                            <div class="rating-box">
+                                                                <span class="brd-rd2 clr1 on"></span>
+                                                                <span class="brd-rd2 clr2 on"></span>
+                                                                <span class="brd-rd2 clr3 on"></span>
+                                                                <span class="brd-rd2 clr4 on"></span>
+                                                                <span class="brd-rd2 clr5 on"></span>
+                                                                <span class="brd-rd2 clr6 on"></span>
+                                                                <span class="brd-rd2 clr7 off"></span>
+                                                                <span class="brd-rd2 clr8 off"></span>
+                                                                <i>4.0</i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="share-wrapper">
+                                                            <div class="fb-share">
+                                                                <label class="switch">
+                                                                    <input type="checkbox">
+                                                                    <span class="switch-slider brd-rd30"></span>
+                                                                </label>
+                                                                <a class="facebook brd-rd2" href="#" title=""
+                                                                   itemprop="url"><i class="fa fa-facebook-square"></i>
+                                                                    Share on Facebook</a>
+                                                            </div>
+                                                            <div class="fb-share">
+                                                                <label class="switch">
+                                                                    <input type="checkbox">
+                                                                    <span class="switch-slider brd-rd30"></span>
+                                                                </label>
+                                                                <a class="twitter brd-rd2" href="#" title=""
+                                                                   itemprop="url"><i class="fa fa-twitter"></i> Share on
+                                                                    Twitter</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="price">{{ product.price }}</span>
+                                                <form action="/order/addtocart/{{ product.id }}" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="qty-wrap">
+                                                        <input name="quantity" class="input" type="number" min="0"
+                                                               max="{{ product.amount }}"
+                                                               value="1">
+                                                    </div>
+                                                    <p itemprop="description">{{ product.description }}</p>
+                                                    <br>
+                                                     </form>
+                                                    <a class="brd-rd3" href="/order/addtocart/{{ product.id }}" title=""
+                                                       itemprop="url">Hemen Sipariş Ver</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12 col-lg-4">
+                                    <div class="order-wrapper">
+                                        <div class="order-inner gradient-brd">
+                                            <h4 itemprop="headline">Siparişlerin</h4>
+                                            <div class="order-list-wrapper">
+                                                <ul class="order-list-inner">
+                                            {% for rs in schopcart %}
+                                                <li>
+                                                <div class="dish-name">
+                                                <img src="{{ rs.product.image.url }}" alt="" width="99" height="99"><br>
+                                                    <i>.</i> <h6 itemprop="headline">{{ rs.product.title }}</h6>
+                                                    <span
+                                                            class="price">{{ rs.price }}</span>
+                                                </div>
+                                                <div class="dish-ingredients">
+                                <span class="check-box"><input type="checkbox" id="checkbox1-1"><label
+                                        for="checkbox1-1"><span>{{ rs.amount }}</span> <i></i></label></span>
+                                                    <span class="check-box"><input type="checkbox"
+                                                                                   id="checkbox1-2"><label
+                                                            for="checkbox1-2"><span>{{ rs.quantity }}</span> <i></i></label></span>
+                                                </div>
+                                                <div class="mor-ingredients">
+                                                    <a class="red-clr" href="/order/deletefromcart/{{ rs.id }}" title=""
+                                                      >SİL</a>
+                                                </div>
+                                            {% endfor %}
+                                            </li>
+
+                                        </ul>
+                                        <ul class="order-total">
+                                            <li><span></span> <i></i></li>
+
+                                        </ul>
+                                        <ul class="order-method brd-rd2 red-bg">
+                                            <li><span>Toplam Fiyat</span> <span class="price">{{ total }}</span></li>
+
+                                            <li><a class="brd-rd2" href="/order/orderproduct/" title="" itemprop="url">Ödemeyi Onayla</a>
+                                            </li>
+                                        </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="restaurant-detail-wrapper">
+                                        <div class="restaurant-detail-info">
+                                            <h3 class="title4" itemprop="headline"><span
+                                                    class="sudo-bottom sudo-bg-red">Yorum</span>lar (2)
+                                            </h3>
+                                            <div class="comments-wrapper">
+                                                <ul class="comments-thread">
+                                                    {% for rs in comments %}
+                                                        <li>
+                                                            <div class="comment">
+                                                                <img class="brd-rd50"
+                                                                     src="{{ rs.user.image }}"
+                                                                 >
+                                                                <div class="comment-info">
+                                                                    <h4 itemprop="headline"><a href="#" title=""
+                                                                                               itemprop="url">{{ rs.user.first_name }}</a>
+                                                                    </h4>
+                                                                    <i>{{ rs.create_at }} / <a
+                                                                            class="comment-reply-link red-clr" href="#"
+                                                                            title="" itemprop="url">Reply</a></i>
+                                                                    <br>
+                                                                    <p itemprop="description"> {{ rs.subject }}</p>
+                                                                    <br>
+                                                                    <p itemprop="description"> {{ rs.comment }}</p>
+
+
+
+                                                                    {% if rs.rate  >= 1 %}
+                                                                        <input class="star star-1" id="star-1"
+                                                                               type="radio" name="rate" value="1"/>
+                                                                        <label class="star star-1"
+                                                                               for="star-1"></label>
+                                                                    {% endif %}
+                                                                    {% if rs.rate  >= 2 %}
+                                                                        <input class="star star-2" id="star-2"
+                                                                               type="radio" name="rate" value="2"/>
+                                                                        <label class="star star-2"
+                                                                               for="star-2"></label>
+                                                                    {% endif %}
+                                                                    {% if rs.rate >= 3 %}
+                                                                        <input class="star star-3" id="star-3"
+                                                                               type="radio" name="rate"/>
+                                                                        <label class="star star-3"
+                                                                               for="star-3"></label>
+                                                                    {% endif %}
+                                                                    {% if rs.rate >= 4 %}
+                                                                        <input class="star star-4" id="star-4"
+                                                                               type="radio" name="rate" value="4"/>
+                                                                        <label class="star star-4"
+                                                                               for="star-4"></label>
+                                                                    {% endif %}
+                                                                    {% if rs.rate >= 5 %}
+                                                                        <input class="star star-5" id="star-5"
+                                                                               type="radio" name="rate" value="5"/>
+                                                                        <label class="star star-5"
+                                                                               for="star-5"></label>
+                                                                    {% endif %}
+
+
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }} role=" alert">
+                                                {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    <div class="col-md-8 col-sm-12 col-lg-8">
+                                        <h3 class="title4" itemprop="headline"><span
+                                                class="sudo-bottom sudo-bg-red">Bir</span> Yorum Bırak
+                                        </h3>
+                                        <form class="reply-form" action="/product/addcomment/{{ product.id }}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                                    <input class="brd-rd2" name="subject" id="id_subject"
+                                                           type="text" placeholder="Konu">
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                                        <textarea class="brd-rd2" name="comment" id="id_comment"
+                                                                  placeholder="Mesajınız"></textarea>
+                                                </div>
+
+                                                <div class="vTextField ">
+                                                    <strong class="text-uppercase">Kaç yıldız verirsiniz</strong>
+                                                </div>
+
+                                                <div class="stars">
+                                                    <form action="">
+                                                        <input class="star star-5" id="star-5" type="radio"
+                                                               name="rate" value="5"/>
+                                                        <label class="star star-5" for="star-5"></label>
+                                                        <input class="star star-4" id="star-4" type="radio"
+                                                               name="rate" value="4"/>
+                                                        <label class="star star-4" for="star-4"></label>
+                                                        <input class="star star-3" id="star-3" type="radio"
+                                                               name="rate" value="3"/>
+                                                        <label class="star star-3" for="star-3"></label>
+                                                        <input class="star star-2" id="star-2" type="radio"
+                                                               name="rate" value="5"/>
+                                                        <label class="star star-2" for="star-2"></label>
+                                                        <input class="star star-1" id="star-1" type="radio"
+                                                               name="rate" value="1"/>
+                                                        <label class="star star-1" for="star-1"></label>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    {% if user.id is not None %}
+                                                        <button class="brd-rd3 red-bg" type="submit">Gönder</button>
+                                                    {% else %}
+                                                        Yorum Eklemek için<b><a href="/login">Giriş</a> </b>Yapınız!
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Section Box -->
+
+    </section>
+{% endblock %}

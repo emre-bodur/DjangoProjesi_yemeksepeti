@@ -1,112 +1,243 @@
 {% load static %}
 <section>
-            <div class="block">
-                <div style="background-image: url(assets/images/topbg.jpg);" class="fixed-bg"></div>
-                <div class="restaurant-searching text-center">
-                    <div class="restaurant-searching-inner">
-                        <h2 itemprop="headline">Order <span>Food Online From</span> the Best Restaurants</h2>
-                        <form class="restaurant-search-form brd-rd2">
-                            <div class="row mrg10">
-                                <div class="col-md-6 col-sm-5 col-lg-5 col-xs-12">
-                                    <div class="input-field brd-rd2"><input class="brd-rd2" type="text" placeholder="Restaurant Name"></div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
-                                    <div class="input-field brd-rd2"><i class="fa fa-map-marker"></i><input class="brd-rd2" type="text" placeholder="Search Location"><i class="fa fa-location-arrow"></i></div>
-                                </div>
-                                <div class="col-md-2 col-sm-3 col-lg-3 col-xs-12">
-                                    <button class="brd-rd2 red-bg" type="submit">SEARCH</button>
-                                </div>
+    <div class="block">
+        <div style="background-image: url({% static 'images/topbg.jpg' %});" class="fixed-bg"></div>
+        <div class="restaurant-searching text-center">
+            <div class="restaurant-searching-inner">
+                <h2 itemprop="headline">Söyle Getirelim <span>En iyi restoranlardan </span> En iyi yemekleri sipariş ver
+                    :)</h2>
+
+                <script>
+
+                    $(function () {
+                        $("#query").autocomplete({
+                            source: "/search_auto/",
+                            select: function (event, ui) { //item selected
+                                AutoCompleteSelectHandler(event, ui)
+                            },
+                            minLength: 2,
+                        });
+                    });
+
+                    function AutoCompleteSelectHandler(event, ui) {
+                        var selectedObj = ui.item;
+                    }
+
+                </script>
+
+
+                <form action="/search/" method="post" class="restaurant-search-form brd-rd2">
+                    {% csrf_token %}
+
+                    <div class="row mrg10">
+                        {% load mptt_tags %}
+                        <div class="select-css">
+
+                            <select name="catid" class="select-css">
+                                <option class="select2-search--dropdown" value="0">Tüm Kategoriler</option>
+                                {% recursetree category %}
+                                    {% if node.is_leaf_node %}
+                                        <option class="select2-search--dropdown"
+                                                value="{{ node.id }}">{{ node.title }}</option>{% endif %}
+                                    {% if not node.is_leaf_node %}
+                                        <optgroup label="{{ node.title }}">
+                                            {{ children }}
+                                        </optgroup>
+                                    {% endif %}
+                                {% endrecursetree %}
+                            </select>
+
+                        </div>
+                        <div class="col-md-6 col-sm-5 col-lg-5 col-xs-12">
+                            <div class="input-field brd-rd2">
+                                <input name="query" class="brd-rd2 " type="text"
+                                       placeholder="ÇILGIN LEZZETLERİ ARA   ">
                             </div>
-                        </form>
-                        <div class="funfacts">
-                                <div class="col-md-3 col-sm-6 col-lg-3">
-                                    <div class="fact-box">
-                                        <i class="brd-rd50"><img src="assets/images/resource/fact-icon1.png" alt="fact-icon1" itemprop="image"></i>
-                                        <div class="fact-inner">
-                                            <strong><span class="counter">137</span></strong>
-                                            <h5>Restaurant</h5>
-                                        </div>
-                                    </div><!-- Fact Box -->
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-lg-3">
-                                    <div class="fact-box">
-                                        <i class="brd-rd50"><img src="assets/images/resource/fact-icon2.png" alt="fact-icon2" itemprop="image"></i>
-                                        <div class="fact-inner">
-                                            <strong><span class="counter">158</span></strong>
-                                            <h5>People Served</h5>
-                                        </div>
-                                    </div><!-- Fact Box -->
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-lg-3">
-                                    <div class="fact-box">
-                                        <i class="brd-rd50"><img src="assets/images/resource/fact-icon3.png" alt="fact-icon3" itemprop="image"></i>
-                                        <div class="fact-inner">
-                                            <strong><span class="counter">659</span>K</strong>
-                                            <h5>Happy Service</h5>
-                                        </div>
-                                    </div><!-- Fact Box -->
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-lg-3">
-                                    <div class="fact-box">
-                                        <i class="brd-rd50"><img src="assets/images/resource/fact-icon4.png" alt="fact-icon4" itemprop="image"></i>
-                                        <div class="fact-inner">
-                                            <strong><span class="counter">235</span></strong>
-                                            <h5>Regular users</h5>
-                                        </div>
-                                    </div><!-- Fact Box -->
-                                </div>
-                        </div><!-- Fun Facts -->
+                        </div>
+
+                        <div class="col-md-2 col-sm-3 col-lg-3 col-xs-12">
+                            <button class="brd-rd2 red-bg" type="submit">ARA</button>
+                        </div>
                     </div>
-                    <img class="left-scooty-mockup" src="assets/images/resource/restaurant-mockup1.png" alt="restaurant-mockup1.png" itemprop="image">
-                    <img class="bottom-clouds-mockup" src="assets/images/resource/clouds.png" alt="clouds.png" itemprop="image">
-                </div><!-- Restaurant Searching -->
-            </div>
-        </section>
-<section>
-            <div class="block blackish low-opacity">
-                <div class="fixed-bg" style="background-image: url(assets/images/parallax1.jpg);"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                            <div class="title1-wrapper text-center">
-                                <div class="title1-inner">
-                                    <span>Website for Restaurant and Cafe</span>
-                                    <h2 class="text-white" itemprop="headline">easy order in 3 steps</h2>
-                                </div>
+                </form>
+                <div class="funfacts">
+                    <div class="col-md-3 col-sm-6 col-lg-3">
+                        <div class="fact-box">
+                            <i class="brd-rd50"><img src="{% static 'images/resource/fact-icon1.png' %}"
+                                                     alt="fact-icon1" itemprop="image"></i>
+                            <div class="fact-inner">
+                                <strong><span class="counter">137</span></strong>
+                                <h5>Restoranlar</h5>
                             </div>
-                            <div class="remove-ext text-center">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-4 col-lg-4">
-                                        <div class="step-box wow fadeIn" data-wow-delay="0.2s">
-                                            <i><img src="assets/images/resource/setp-img1.png" alt="setp-img1.png" itemprop="image"> <span class="brd-rd50 red-bg">1</span></i>
-                                            <div class="setp-box-inner">
-                                                <h4 itemprop="headline">Explore Restaurants</h4>
-                                                <p itemprop="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                        </div><!-- Fact Box -->
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-lg-3">
+                        <div class="fact-box">
+                            <i class="brd-rd50"><img src="{% static 'images/resource/fact-icon2.png' %}"
+                                                     alt="fact-icon2" itemprop="image"></i>
+                            <div class="fact-inner">
+                                <strong><span class="counter">158</span></strong>
+                                <h5>Hizmet Veren Personel</h5>
+                            </div>
+                        </div><!-- Fact Box -->
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-lg-3">
+                        <div class="fact-box">
+                            <i class="brd-rd50"><img src="{% static 'images/resource/fact-icon3.png' %}"
+                                                     alt="fact-icon3" itemprop="image"></i>
+                            <div class="fact-inner">
+                                <strong><span class="counter">659</span>K</strong>
+                                <h5>Mutlu Müşteri</h5>
+                            </div>
+                        </div><!-- Fact Box -->
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-lg-3">
+                        <div class="fact-box">
+                            <i class="brd-rd50"><img src="{% static 'images/resource/fact-icon4.png' %}"
+                                                     alt="fact-icon4" itemprop="image"></i>
+                            <div class="fact-inner">
+                                <strong><span class="counter">235</span></strong>
+                                <h5>Müdavimlerimiz :) </h5>
+                            </div>
+                        </div><!-- Fact Box -->
+                    </div>
+                </div><!-- Fun Facts -->
+            </div>
+
+            <img class="bottom-clouds-mockup" src="{% static 'images/resource/clouds.png' %}" alt="clouds.png"
+                 itemprop="image">
+        </div><!-- Restaurant Searching -->
+    </div>
+</section>
+
+<section>
+    <div class="block less-spacing gray-bg top-padd30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="sec-box">
+                        <div class="remove-ext">
+                            <div class="row">
+                                {% for rs in randomproducts %}
+                                    <div class="col-md-4 col-sm-6 col-lg-4">
+                                        <div class="popular-dish-box style2 wow fadeIn" data-wow-delay="0.2s">
+                                            <div class="popular-dish-thumb">
+                                                <a href="/product/{{ rs.id }}/{{ rs.slug }}" title=""
+                                                   itemprop="url"><img
+                                                        src="{{ rs.image.url }} "
+                                                        alt="popular-dish-img1.jpg" itemprop="image"
+                                                        style="height: 250px"></a>
+                                                <span class="post-rate yellow-bg brd-rd2"><i class="fa fa-star-o"></i> 4.25</span>
                                             </div>
-                                        </div><!-- Step Box -->
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-lg-4">
-                                        <div class="step-box wow fadeIn" data-wow-delay="0.4s">
-                                            <i><img src="assets/images/resource/setp-img2.png" alt="setp-img2.png" itemprop="image"> <span class="brd-rd50 red-bg">2</span></i>
-                                            <div class="setp-box-inner">
-                                                <h4 itemprop="headline">Choose a Tasty Dish</h4>
-                                                <p itemprop="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                                            <div class="popular-dish-info">
+                                                <h4 itemprop="headline"><a href="food-detail.html" title=""
+                                                                           itemprop="url">{{ rs.title }}</a></h4>
+                                                <p itemprop="description">{{ rs.description }}</p>
+                                                <span class="price">{{ rs.price }}</span><p></p>
+                                               <a class="brd-rd4 " href="/order/addtocart/{{ rs.id }}" title="Sepete Ekle"
+                                                   itemprop="url">Sepete Ekle </a>
+
                                             </div>
-                                        </div><!-- Step Box -->
+                                        </div><!-- Popular Dish Box -->
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-lg-4">
-                                        <div class="step-box wow fadeIn" data-wow-delay="0.6s">
-                                            <i><img src="assets/images/resource/setp-img3.png" alt="setp-img3.png" itemprop="image"> <span class="brd-rd50 red-bg">3</span></i>
-                                            <div class="setp-box-inner">
-                                                <h4 itemprop="headline">Follow The Status</h4>
-                                                <p itemprop="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                                            </div>
-                                        </div><!-- Step Box -->
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="block less-spacing gray-bg top-padd30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="sec-box">
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="section">
+                                        <h3 class="text-left"">HABERLER</h3>
+                                        <hr>
+                                    </div>
+                                    <ul class="list">
+                                        {% for rs in news %}
+                                            <li><a href="/content/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="list-group">
+                                        <h3 class="text-left">Duyurular</h3>
+                                        <hr>
+                                    </div>
+                                    <ul class="list-group">
+                                        {% for rs in announcements %}
+                                            <li><a href="/content/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="block blackish low-opacity">
+        <div class="fixed-bg" style="background-image: url({% static 'images/parallax1.jpg' %};"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="title1-wrapper text-center">
+                        <div class="title1-inner">
+                            <span>En iyi Restoran ve Menülerin birleştigi tek Adres</span>
+                            <h2 class="text-white" itemprop="headline">3 adımda kolay sipariş...</h2>
+                        </div>
+                    </div>
+                    <div class="remove-ext text-center">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-lg-4">
+                                <div class="step-box wow fadeIn" data-wow-delay="0.2s">
+                                    <i><img src="{% static 'images/resource/setp-img1.png' %}" alt="setp-img1.png"
+                                            itemprop="image"> <span class="brd-rd50 red-bg">1</span></i>
+                                    <div class="setp-box-inner">
+                                        <h4 itemprop="headline">Restoranları Keşfet</h4>
+                                        <p itemprop="description">Binlerce restorant arasından en ucuz ve kalitelisini
+                                            seçin</p>
+                                    </div>
+                                </div><!-- Step Box -->
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4">
+                                <div class="step-box wow fadeIn" data-wow-delay="0.4s">
+                                    <i><img src="{% static 'images/resource/setp-img2.png' %}" alt="setp-img2.png"
+                                            itemprop="image"> <span class="brd-rd50 red-bg">2</span></i>
+                                    <div class="setp-box-inner">
+                                        <h4 itemprop="headline">Lezzetli Bir Yemek Seçin</h4>
+                                        <p itemprop="description">Binlerce yemek çeşidi arasından seçmek zor ama siz
+                                            yine de aç kalmayın :)</p>
+                                    </div>
+                                </div><!-- Step Box -->
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4">
+                                <div class="step-box wow fadeIn" data-wow-delay="0.6s">
+                                    <i><img src="{% static 'images/resource/setp-img3.png' %}" alt="setp-img3.png"
+                                            itemprop="image"> <span class="brd-rd50 red-bg">3</span></i>
+                                    <div class="setp-box-inner">
+                                        <h4 itemprop="headline">Siparişinizi Takip Edin</h4>
+                                        <p itemprop="description">Siparişinizi en kısa sürede size ulaştıracagız :)</p>
+                                    </div>
+                                </div><!-- Step Box -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
