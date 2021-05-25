@@ -1,0 +1,127 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Sipariş Detayı {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">Şipariş Detayı</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block less-spacing gray-bg top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                            {% include "user_panel.html" %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12 col-lg-8">
+                                        <table class="table table-striped table-hover">
+                                            <h4 class="title3">SİPARİŞ BİLGİLERİ</h4>
+                                            <thead>
+                                            <tr>
+                                                <th>ADI SOYADI</th>
+                                                <th>TELEFON</th>
+                                                <th>ADRES</th>
+                                                <th>ŞEHİR</th>
+                                                <th>ÜLKE</th>
+                                                <th>DURUM</th>
+                                                <th>TARİH</th>
+                                                <th>NOT</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td><img src="{{ order.user_name }}" height="60px" alt=""></td>
+                                                    <td><span
+                                                            style="text-transform: uppercase"> {{ order.phone }}</span>
+                                                    </td>
+                                                    <td><span style="text-transform: uppercase">{{ order.address}}</span>
+                                                    </td>
+                                                    <td>{{ order.city }}</td>
+                                                    <td> {{ order.country }}</td>
+                                                    <td>{{ order.status }}</td>
+                                                    <td>{{ order.date }}</td>
+                                                    <td>{{ order.adminnote }}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12 col-lg-8">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>ÜRÜN ADI</th>
+                                                <th>FİYATI</th>
+                                                <th>ADET</th>
+                                                <th>DURUM</th>
+                                                <th>TARİH</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                        {% for rs in orderitems %}
+                                                <tr>
+                                                    <td><img src="{{ rs.product.image.url }}" height="60px" alt=""></td>
+                                                    <td><span
+                                                            style="text-transform: uppercase"> {{ rs.product.title }}</span>
+                                                    </td>
+                                                    <td><span style="text-transform: uppercase">{{ rs.price }}</span>
+                                                    </td>
+                                                    <td>{{ rs.quantity }}</td>
+                                                    <td><span class="status text-success">&bull;</span> {{ rs.status }}
+                                                    </td>
+                                                    <td>{{ rs.created_at }}</td>
+                                                </tr>
+                                        {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

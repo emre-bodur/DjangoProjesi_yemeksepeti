@@ -1,0 +1,90 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Alışveriş Sepeti - {{ setting.company }} {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">Alışveriş Sepeti</h1>
+                        <span>-----------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Anasayfa / </a></li>
+                <a class="breadcrumb-item active" href="Shopcart_products.html">Sepet</a></li>
+            </ol>
+        </div>
+    </div>
+    <section>
+        <div class="bread-crumbs-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8 col-sm-12 col-lg-8">
+                            <div class="order-wrapper">
+                                <div class="order-inner gradient-brd">
+                                    <h4 itemprop="headline">SİPARİŞLERİN</h4>
+                                    <div class="order-list-wrapper">
+                                        <ul class="order-list-inner">
+                                            {% for rs in schopcart %}
+                                                <li>
+                                                <div class="dish-name">
+                                                <img src="{{ rs.product.image.url }}" alt="" width="99" height="99"><br>
+                                                    <i>.</i> <h6 itemprop="headline">{{ rs.product.title }}</h6>
+                                                    <span
+                                                            class="price">{{ rs.price }}</span>
+                                                </div>
+                                                <div class="dish-ingredients">
+                                <span class="check-box"><input type="checkbox" id="checkbox1-1"><label
+                                        for="checkbox1-1"><span>{{ rs.amount }}</span> <i></i></label></span>
+                                                    <span class="check-box"><input type="checkbox"
+                                                                                   id="checkbox1-2"><label
+                                                            for="checkbox1-2"><span>{{ rs.quantity }}</span> <i></i></label></span>
+                                                </div>
+                                                <div class="mor-ingredients">
+                                                    <a class="red-clr" href="/order/deletefromcart/{{ rs.id }}" title=""
+                                                       itemprop="url">SİL</a>
+                                                </div>
+                                            {% endfor %}
+                                            </li>
+
+                                        </ul>
+                                        <ul class="order-total">
+                                            <li><span></span> <i></i></li>
+
+                                        </ul>
+                                        <ul class="order-method brd-rd2 red-bg">
+                                            <li><span>Toplam Fiyat</span> <span class="price">{{ total }}</span></li>
+
+                                            <li><a class="brd-rd2" href="/order/orderproduct/" title="" itemprop="url">Ödemeyi Onayla</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

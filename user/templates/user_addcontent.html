@@ -1,0 +1,79 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} İÇERİK PANELİ {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">İÇERİK PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">İçerikler</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block less-spacing gray-bg top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12 col-lg-3">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                            {% include "user_panel.html" %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-lg-9">
+                                        <h4 class="title1-inner">İçerik Ekle</h4>
+                                        <div class="content">
+                                            <form method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <fieldset class="form-group">
+                                                    {{ form.media }}
+                                                    {{ form.as_p }}
+                                                </fieldset>
+                                                <button class="red-bg brd-rd3" type="submit">KAYDET</button>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

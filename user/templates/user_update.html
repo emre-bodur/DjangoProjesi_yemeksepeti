@@ -1,0 +1,75 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} {{ profile.user_name }} Profili {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">Profil</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block less-spacing gray-bg top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                        <div class="content">
+                                            <div class="media">
+                                                <img src="{{ user.userprofile.image.url }}" style="height: 150px;border-radius: 45px">
+                                            </div>
+                                            <form method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <fieldset class="form-group">
+                                                    {{ user_form.as_p }}
+                                                    {{ profile_form.as_p }}
+                                                </fieldset>
+                                                <div class="form-group">
+                                                    <button class="red-clr change-password" type="submit">Güncelle</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Section Box -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Order List {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">Şiparişlerim</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block less-spacing gray-bg top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                            {% include "user_panel.html" %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12 col-lg-8">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>ADI</th>
+                                                <th>SOYADI</th>
+                                                <th>TARİH</th>
+                                                <th>DURUM</th>
+                                                <th>TOPLAM</th>
+                                                <th>DETAY</th>
+                                            </tr>
+                                            </thead>
+
+                                             {% for rs in orders %}
+                                            <tr>
+                                                <td>{{ rs.id }}</td>
+                                                <td><a href="#">
+                                                  <span style="text-transform: uppercase"> {{ rs.first_name }}</span></a></td>
+                                                <td><span style="text-transform: uppercase">{{ rs.last_name }}</span></td>
+                                                <td>{{ rs.create_at }}</td>
+                                                <td><span class="status text-success">&bull;</span> {{ rs.status }}</td>
+                                                <td>{{ rs.total }}</td>
+                                                <td><span style="text-transform: uppercase"><a href="/user/orderdetail/{{ rs.id }}" >Detay</a></span></td>
+                                            </tr>
+                                            {% endfor %}
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

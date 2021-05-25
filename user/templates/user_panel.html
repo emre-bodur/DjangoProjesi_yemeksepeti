@@ -1,0 +1,28 @@
+<div class="profile-sidebar-inner brd-rd5">
+    <div class="user-info red-bg">
+        <img class="brd-rd50" src="{{ profile.image.url }}"
+             alt="" itemprop="image">
+        <div class="user-info-inner">
+            <h5 itemprop="headline"><a href="#" title="" itemprop="url"
+                                       class="text-uppercase">{{ profile.user_name }}</a></h5>
+            <span><a href="#" title=""
+                     itemprop="url">{{ profile.user.email }}</a></span>
+            <a class="brd-rd3 sign-out-btn yellow-bg" href="/logout/"
+               title="" itemprop="url"><i class="fa fa-sign-out"></i> Çıkış
+                Yap!</a>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="/user"><i
+                class="fa fa-dashboard"></i> Kullanıcı Profili</a></li>
+        <li><a href="/user/shopcart"><i
+                class="fa fa-shopping-basket"></i>SEPETİMDEKİLER</a></li>
+        <li><a href="/user/contents"><i
+                class="fa fa-comments"></i> İÇERİKLERİM </a></li>
+        <li><a href="/user/orders"><i
+                class="fa fa-shopping-basket"></i> SİPARİŞLERİM</a></li>
+        <li><a href="/user/comments"><i
+                class="fa fa-heart"></i> YORUMLARIM</a></li>
+
+    </ul>
+</div>

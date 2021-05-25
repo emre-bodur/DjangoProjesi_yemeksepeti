@@ -1,0 +1,88 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} {{ product.title }} {% endblock %}
+{% block  keywords %} {{ product.keywords }} {% endblock %}
+{% block  description %}{{ product.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static 'images/topbg.jpg' %});"></div>
+            <div class="page-title-wrapper text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">Search Your Favourite Food</h1>
+                        <form class="restaurant-search-form brd-rd2">
+                            <div class="row mrg15">
+                                <div class="col-md-10 col-sm-12 col-lg-8 col-xs-12">
+                                    <div class="input-field brd-rd"><input class="brd-rd2" type="text"
+                                                                           placeholder="Restaurant Name"></div>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-lg-3 col-xs-12">
+                                    <button class="brd-rd2 red-bg" type="submit">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" title="" itemprop="url">Anasayfa</a></li>
+                <li class="breadcrumb-item active"><a
+                        href="/category/{{ product.category.id }}/{{ product.category.slug }}" title=""
+                        itemprop="url">{{ product.category }}</a></li>
+                <li class="breadcrumb-item active"><a href="#" title="" itemprop="url">{{ product.title }}</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block gray-bg bottom-padd210 top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sec-box">
+                            <div class="sec-wrapper">
+                                <div class="col-md-8 col-sm-12 col-lg-8">
+                                    <img src="{{ content.image.url }}" height="300" align="left"
+                                         style="padding: 10px; border-radius: 25px; ">
+
+                                    {{ content.detail|safe }}
+
+
+                                </div>
+
+                                <div class="col-md-4 col-sm-12 col-lg-4">
+
+                                    <div class="order-wrapper">
+                                    <hr>
+                                    {% for rs in images %}
+                                        <img src="{{ rs.image.url }}" height="100" alt="">
+
+                                    {% endfor %}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- Section Box -->
+
+    </section>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} {{ profile.user_name }} Profili {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">Profil</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="bread-crumbs-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                            {% include "user_panel.html" %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+                                        <div class="profile-info-form-wrap">
+                                            <form class="profile-info-form">
+                                                <div class="row mrg20">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                        <label>İSİM SOYİSİM <sup>*</sup></label>
+                                                        <input class="brd-rd3" type="text"
+                                                               placeholder="İsminizi Giriniz"
+                                                               value="{{ profile.user_name }}">
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                        <label>Email ADRESİ <sup>*</sup></label>
+                                                        <input class="brd-rd3" type="email"
+                                                               placeholder="Email Adresinizi Giriniz"
+                                                               value="{{ profile.user.email }}">
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                        <label>Telefon Numarası <sup>*</sup></label>
+                                                        <input class="brd-rd3" type="text"
+                                                               placeholder="Telefon Numaranızı Giriniz"
+                                                               value="{{ profile.user.telefon }}">
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                                        <label>Ülke <sup>*</sup></label>
+                                                        <div class="select-wrp">
+                                                            <select>
+                                                                <option>Türkiye</option>
+                                                                <option>Kazakisan</option>
+                                                                <option>Azarbaycan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                                        <label>Adress <sup>*</sup></label>
+                                                        <input class="brd-rd3" type="text"
+                                                               value="{{ profile.user.adress }}">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                                        <label>City <sup>*</sup></label>
+                                                        <div class="select-wrp">
+                                                            <select>
+                                                                <option>Ankara</option>
+                                                                <option>Karabük</option>
+                                                                <option>İstanbul</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            <button class="mbtn red"  >KAYDET</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div><!-- Section Box -->
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+{% endblock %}

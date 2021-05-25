@@ -1,0 +1,96 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Restorant Menüleri {% endblock %}
+{% block  keywords %}  {% endblock %}
+{% block  description %} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <div class="block">
+        <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+        <div class="restaurant-searching text-center">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="page-title-inner">
+                    <h1 itemprop="headline">Restoran Menüleri</h1>
+                    <span>---------------------------------</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Anasayfa</a></li>
+
+                <li class="breadcrumb-item active"><a href="#" title="" itemprop="url">{{ restaurants.title }}</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="bread-crumbs-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sec-box">
+                            <div class="sec-wrapper">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <div class="restaurant-detail-wrapper">
+                                        <div class="restaurant-detail-info">
+                                            <div class="restaurant-detail-thumb">
+                                                {% for foo in restaurant %}
+                                                    <h1>{{ foo.title }}</h1>
+                                                    <hr>
+
+                                                    {% for rs in products %}
+                                                        <div class="row">
+                                                        <div class="col-md-4 col-sm-6 col-lg-4">
+                                                            <div class="popular-dish-box style2 wow fadeIn"
+                                                                 data-wow-delay="0.2s">
+                                                                <div class="popular-dish-thumb">
+                                                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                                                       title=""
+                                                                       itemprop="url"><img
+                                                                            src="{{ rs.image.url }} "
+                                                                            alt="" style="height: 250px"
+                                                                            itemprop="image"></a>
+                                                                    <span class="post-rate yellow-bg brd-rd2">
+                                                                        <i class="fa fa-star-o"></i>{{ comments.rate }}</span>
+                                                                </div>
+                                                                <div class="popular-dish-info">
+                                                                    <h4 itemprop="headline"><a
+                                                                            href="/product/{{ rs.id }}/{{ rs.slug }}>{{ rs.title }}"
+                                                                            title=""
+                                                                            itemprop="url">{{ rs.title }}</a>
+                                                                    </h4>
+                                                                    <span class="price">{{ rs.price }}</span>
+                                                                    <p itemprop="description">{{ rs.description }}</p>
+                                                                    <a class="brd-rd3 "
+                                                                       href="/order/addtocart/{{ rs.id }}"
+                                                                       title="Order Now"
+                                                                       itemprop="url">Hemen Sipariş Ver</a>
+                                                                </div>
+                                                            </div><!-- Popular Dish Box -->
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

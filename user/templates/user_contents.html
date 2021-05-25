@@ -1,0 +1,101 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} İÇERİKLER {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">İÇERİK PANELİNE HOŞGELDİNİZ</h1>
+                        <span>---------------------------------------------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active">İçerikler</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="block less-spacing gray-bg top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="sec-box">
+                            <div class="dashboard-tabs-wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
+                                            {% include "user_panel.html" %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12 col-lg-8">
+                                    <h4 class="title1-inner">Kullanıcı İçerik Listesi<br><br> <a class="red-bg brd-rd3" href="/user/addcontent">İçerik Ekle</a> </h4>
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>RESİM</th>
+                                                <th>BAŞLIK</th>
+                                                <th>TÜR</th>
+                                                <th>MENÜ</th>
+                                                <th>GALERİ</th>
+                                                <th>DURUM</th>
+                                                <th>TARİH</th>
+                                                <th>DETAY</th>
+                                            </tr>
+                                            </thead>
+
+                                             {% for rs in contents %}
+                                            <tr>
+
+                                                <td><img src="{{ rs.image.url }}" style="height: 110px"></td>
+                                                <td>
+                                                  <span style="text-transform: uppercase"> {{ rs.title }}</span></a></td>
+                                                <td><span style="text-transform: uppercase">{{ rs.type }}</span></td>
+                                                <td>{{ rs.menu.title }}</td>
+                                                <td><a href="javascript:;" onclick="window.open('/user/contentaddimage/{{ rs.id }}', 'gallery', 'height=600,width=800,top=50,left=150' )">Galeri</a> </td>
+                                                <td><span class="status text-success">&bull;</span> {{ rs.status }}</td>
+                                                <td>{{ rs.create_at }}</td>
+                                                <td><span style="text-transform: uppercase">
+                                                    <a class="red-bg brd-rd3" href="/user/contentedit/{{ rs.id }}/" >İÇERİK DÜZENLE</a>
+                                                </span>
+                                                </td>
+                                            <td><span style="text-transform: uppercase">
+                                                    <a class="red-bg brd-rd3" href="/user/contentdelete/{{ rs.id }}" onclick="return confirm('Yorumu Silmek İstedigine Emin misin?')">İÇERİGİ SİL</a>
+                                                </span>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

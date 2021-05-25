@@ -1,0 +1,33 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Giriş Sayfası - {{ setting.company }} {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    
+   <section>
+            <div class="block">
+                <div style="background-image: url({% static 'images/topbg.jpg' %});" class="fixed-bg"></div>
+                <div class="error-page-wrapper text-center">
+                    <div class="error-page-inner">
+                        <h1 itemprop="headline">404 <span class="red-clr">Error</span></h1>
+                        <h4 itemprop="headline"><span class="yellow-clr">Oops,</span> Aradığınız Sayfa Bulunamadı!</h4>
+
+                        <a class="brd-rd2 yellow-bg" href="/" title="" itemprop="url"><i class="fa fa-home"></i> Anasayfaya Dön</a>
+
+                    </div>
+                </div><!-- Error Page Wrapper -->
+            </div>
+        </section>
+
+
+
+{% endblock %}

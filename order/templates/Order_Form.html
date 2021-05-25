@@ -1,0 +1,151 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block  title %} Alışveriş Sepeti - {{ setting.company }} {% endblock %}
+{% block  keywords %} {{ setting.keywords }} {% endblock %}
+{% block  description %}{{ setting.description }} {% endblock %}
+{% block  head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block  sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block  content %}
+    <section>
+        <div class="block">
+            <div class="fixed-bg" style="background-image: url({% static '/images/topbg.jpg' %});"></div>
+            <div class="restaurant-searching text-center">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="page-title-inner">
+                        <h1 itemprop="headline">Alışveriş Sepeti</h1>
+                        <span>-----------------------------</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bread-crumbs-wrapper">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="" itemprop="url">Anasayfa / </a></li>
+                <a class="breadcrumb-item active" href="Shopcart_products.html">Alışveriş Sepeti</a></li>
+            </ol>
+        </div>
+    </div>
+    <section>
+        <div class="block gray-bg bottom-padd210 top-padd30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sec-box">
+                            <div class="sec-wrapper">
+                                <form action="" method="post">
+                                    <div class="col-md-6 col-sm-12 col-lg-6">
+                                        <div class="order-inner gradient-brd">
+
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-50">
+                                                    <h3>Billing Address</h3>
+                                                    <label for="fname"><i class="fa fa-user"></i> First Name</label>
+                                                    <input type="text" id="fname" name="first_name"
+                                                           value="{{ user.first_name }} ">
+                                                    <label for="fname"><i class="fa fa-user"></i> Last Name</label>
+                                                    <input type="text" id="fname" name="last_name"
+                                                           value="{{ user.last_name }}">
+                                                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                                    <input type="text" id="email" name="email"
+                                                           value="{{ user.email }}">
+                                                    <label for="adr"><i class="fa fa-address-card-o"></i>
+                                                        Address</label>
+                                                    <input type="text" id="adr" name="address"
+                                                           value="{{ profile.address }}">
+                                                    <label for="city"><i class="fa fa-institution"></i> City</label>
+                                                    <input type="text" id="city" name="city"
+                                                           value="{{ profile.country }}">
+
+                                                    <div class="row">
+                                                        <div class="col-50">
+                                                            <label for="state">State</label>
+                                                            <input type="text" id="state" name="state"
+                                                                   value="{{ profile.city }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-50">
+                                                    <h3>Payment</h3>
+                                                    <label for="fname">Accepted Cards</label>
+                                                    <div class="icon-container">
+                                                        <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                                        <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                                    </div>
+                                                    <label for="cname">Name on Card</label>
+                                                    <input type="text" id="cname" name="cardname"
+                                                           placeholder="John More Doe">
+                                                    <label for="ccnum">Credit card number</label>
+                                                    <input type="text" id="ccnum" name="cardnumber"
+                                                           placeholder="1111-2222-3333-4444">
+                                                    <label for="expmonth">Exp Month</label>
+                                                    <input type="text" id="expmonth" name="expmonth"
+                                                           placeholder="September">
+
+                                                    <div class="row">
+                                                        <div class="col-50">
+                                                            <label for="expyear">Exp Year</label>
+                                                            <input type="text" id="expyear" name="expyear"
+                                                                   placeholder="2018">
+                                                        </div>
+                                                        <div class="col-50">
+                                                            <label for="cvv">CVV</label>
+                                                            <input type="text" id="cvv" name="cvv" placeholder="352">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <label>
+                                            <input type="checkbox" checked="checked" name="sameadr"> Shipping
+                                            address
+                                            same as
+                                            billing
+                                        </label>
+                                        <input type="submit" value="Continue to checkout" class="btn">
+
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-lg-6">
+                                        <div class="order-wrapper">
+                                            <div class="order-inner gradient-brd">
+                                                <div class="container">
+                                                    <h4>Cart </h4>
+                                                    {% for rs in schopcart %}
+                                                        <p><a href="#"><b>{{ rs.product }} </b> </a>
+                                                            <span class="price">>ad.{{ rs.quantity }}</span>
+                                                            <span class="price">>${{ rs.product.price }}</span></p><br>
+                                                        <br>
+                                                    {% endfor %}
+                                                    <p><b>TOPLAM >> </b> <span class="price"
+                                                                               style="color:black"><b> ${{ total }}</b></span>
+                                                    </p>
+
+                                                </div></div></div></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+    </section>
+{% endblock %}
